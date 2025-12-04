@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>RT_GAME - Descargas</title>
+<style>
+    body {
+        font-family: sans-serif;
+        background: #0d0d0d;
+        color: #fff;
+        text-align: center;
+        padding: 40px;
+    }
+    h1 { margin-bottom: 10px; }
+    .btn {
+        display: block;
+        margin: 10px auto;
+        padding: 12px 20px;
+        background: #0099ff;
+        color: #fff;
+        text-decoration: none;
+        width: 250px;
+        border-radius: 8px;
+        font-weight: bold;
+    }
+    .btn:hover { background: #007acc; }
+</style>
+</head>
+<body>
+
+<h1>RT_GAME — Última versión</h1>
+<img src="Screenshot_20251204_103750.png" height="200">
+<p id="version">Cargando la última release…</p>
+
+<div id="buttons"></div>
+
+<script>
+const user = "Pedronagelv";
+const repo = "RT_GAME";
+
+async function cargarRelease() {
+    try {
+        const res = await fetch(`https://api.github.com/repos/Pedroangelv/RT_GAME/releases/latest`);
+        const data = await res.json();
+
+        document.getElementById("version").textContent = 
+            `Versión: ${data.tag_name || "Desconocida"}`;
+
+        const cont = document.getElementById("buttons");
+
+        data.assets.forEach(asset => {
+            const name = asset.name.toLowerCase();
+
+            let label = null;
+            if (name.includes("x86_64")) label = "Descargar para Linux 🐧";
+            if (name.includes("exe") || name.includes("windows")) label = "Descargar para Windows 🪟";
+            if (name.includes("apk") || name.includes("android")) label = "Descargar para Android 🤖";
+
+            if (label) {
+                const a = document.createElement("a");
+                a.className = "btn";
+                a.href = asset.browser_download_url;
+                a.textContent = label;
+                cont.appendChild(a);
+            }
+        });
+
+        if (!cont.children.length) {
+            cont.innerHTML = "<p>No se encontraron builds para Linux/Windows/Android.</p>";
+        }
+
+    } catch (e) {
+        document.getElementById("version").textContent = 
+            "Error obteniendo la release 😓";
+    }
+}
+
+cargarRelease();
+</script>
+
+</body>
+</html>
