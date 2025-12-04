@@ -1,82 +1,121 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>RT_GAME - Descargas</title>
-<style>
-    body {
-        font-family: sans-serif;
-        background: #0d0d0d;
-        color: #fff;
-        text-align: center;
-        padding: 40px;
-    }
-    h1 { margin-bottom: 10px; }
-    .btn {
-        display: block;
-        margin: 10px auto;
-        padding: 12px 20px;
-        background: #0099ff;
-        color: #fff;
-        text-decoration: none;
-        width: 250px;
-        border-radius: 8px;
-        font-weight: bold;
-    }
-    .btn:hover { background: #007acc; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RT GAME</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<h1>RT_GAME — Última versión</h1>
-<img src="Screenshot_20251204_103750.png" height="200">
-<p id="version">Cargando la última release…</p>
+    <header>
+        <h1>RT GAME</h1>
+    </header>
 
-<div id="buttons"></div>
+    <section class="hero">
+        <div class="overlay"></div>
+        <div class="hero-content">
+            <h2>Descarga la última versión</h2>
+            <p id="version">Cargando versión...</p>
 
-<script>
-const user = "Pedronagelv";
-const repo = "RT_GAME";
+            <div class="buttons">
+                <a id="linuxBtn" class="btn" href="#" target="_blank">🐧 Linux</a>
+                <a id="windowsBtn" class="btn" href="#" target="_blank">🪟 Windows</a>
+                <a id="androidBtn" class="btn" href="#" target="_blank">📱 Android</a>
+            </div>
+        </div>
+    </section>
 
-async function cargarRelease() {
-    try {
-        const res = await fetch(`https://api.github.com/repos/Pedroangelv/RT_GAME/releases/latest`);
-        const data = await res.json();
+    <section class="readme">
+    <h2>📘 Sobre el juego</h2>
 
-        document.getElementById("version").textContent = 
-            `Versión: ${data.tag_name || "Desconocida"}`;
+    <div class="readme-box">
+<pre>
+RT_GAME
+Un plataformero sin nada especial, hecho por un estudiante de 11 (ya me gradué 🎆🎆), programador en proceso 
+(Se cae la IA, se cae el desarrollo). Inspirado en el Real Team (Top Manias, Tattiextreme, SiendoRotoplas).
+Cualquier parecido con la ficción es pura… realidad.
 
-        const cont = document.getElementById("buttons");
+    ____  __                        _ __  __       __  __       
+   / __ \/ /___ ___  __   _      __(_) /_/ /_     / /_/ /_  ___ 
+  / /_/ / / __ `/ / / /  | | /| / / / __/ __ \   / __/ __ \/ _ \
+ / ____/ / /_/ / /_/ /   | |/ |/ / / /_/ / / /  / /_/ / / /  __/
+/_/   /_/\__,_/\__, /    |__/|__/_/\__/_/ /_/   \__/_/ /_/\___/ 
+              /____/                                            
+                  __   
+  _________  ____/ /__ 
+ / ___/ __ \/ __  / _ \
+/ /__/ /_/ / /_/ /  __/
+/___/\____/\__,_/\___/
 
-        data.assets.forEach(asset => {
-            const name = asset.name.toLowerCase();
+Es un proyecto experimental hecho en Blazium Engine, un fork de Godot Engine 4.3.2, compatible con Godot.
 
-            let label = null;
-            if (name.includes("x86_64")) label = "Descargar para Linux 🐧";
-            if (name.includes("exe") || name.includes("windows")) label = "Descargar para Windows 🪟";
-            if (name.includes("apk") || name.includes("android")) label = "Descargar para Android 🤖";
+Documentación generada por IA (no oficial): Ask DeepWiki
 
-            if (label) {
-                const a = document.createElement("a");
-                a.className = "btn";
-                a.href = asset.browser_download_url;
-                a.textContent = label;
-                cont.appendChild(a);
-            }
-        });
+🚀 Descargar, estudiar y modificar el proyecto
 
-        if (!cont.children.length) {
-            cont.innerHTML = "<p>No se encontraron builds para Linux/Windows/Android.</p>";
-        }
+Este proyecto es personal, hecho con fines educativos. Si querés:
 
-    } catch (e) {
-        document.getElementById("version").textContent = 
-            "Error obteniendo la release 😓";
-    }
-}
+• Aportar  
+• Revisar  
+• Cacharrear  
+• Hacer tu propia versión  
 
-cargarRelease();
-</script>
+Tenés dos caminos:
+
+✔️ Fork del proyecto  
+Si vas a crear una versión nueva del juego usando este repo, por la licencia del código (GPL 3.0) estás obligado a mantener la misma licencia.
+
+✔️ Crear un repositorio desde cero  
+También podés llevarte ideas, estructuras y mejorar por tu lado.
+
+🧩 Cómo abrir el proyecto
+
+1. Instala Godot 4.x o Blazium.
+2. Descarga o clona este repo:
+
+git clone https://github.com/Pedroangelv/RT_GAME
+
+3. En Godot, importa el archivo project.godot ubicado en RT_GAME/src
+
+Si explota, respirá profundo y probá otra vez.
+
+🧩 Las builds del juego están en la sección “Releases”.
+
+🕹️ Controles
+
+← / → — Caminar  
+Espacio — Saltar  
+Enter — Presionar botones del menú  
+Gamepad — También funciona
+
+🧩 Estado del proyecto
+
+Fase: Alpha con actitud de beta  
+FPS: Los que quiera dar  
+Optimización: Estoy en ello, no me juzguen  
+Plan futuro: 3 niveles por integrante + niveles secretos  
+Si funciona: Sos más rápido que el desarrollador
+
+🎨 Contribuciones
+
+Sprite y animaciones (Douglas) → Enmuterrible / Kauhea4  
+Tilemap 01 → Kenney Assets  
+Tilemap City → GrafxKid  
+City Background → TokyoGeisha  
+Gamepad Buttons → greatdocbrown  
+Pixel Art City → Gandalfhardcore  
+Retro City Assets → mariaparragames
+</pre>
+    </div>
+</section>
+
+
+    <footer>
+        <p>RT GAME • Proyecto Open Source</p>
+    </footer>
+
+    <script src="script.js"></script>
 
 </body>
 </html>
