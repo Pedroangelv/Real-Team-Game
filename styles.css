@@ -119,6 +119,26 @@ header h1 {
     margin-bottom: 10px;
 }
 
+
+.github-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 16px;
+            border: none;
+            cursor: pointer;
+            background: #24292e;
+            color: white;
+            font-size: 16px;
+            border-radius: 6px;
+            text-decoration: none;
+        }
+
+        .github-btn img {
+            height: 20px;
+            width: 20px;
+            margin-right: 8px;
+        }
+
 /* FOOTER */
 footer {
     text-align: center;
