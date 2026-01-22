@@ -33,7 +33,9 @@ header h1 {
 /* HERO */
 .hero {
     position: relative;
-    height: 70vh;
+    min-height: 70vh;
+    height: auto;
+    padding: 80px 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -165,8 +167,6 @@ footer {
     border-radius: 15px;
     padding: 20px;
     max-height: 450px;
-    overflow-y: auto;
-    box-shadow: 0 0 15px rgba(255, 0, 212, 0.25);
 }
 
 .readme-box pre {
@@ -205,4 +205,52 @@ footer {
     transform: scale(1.02);
     transition: transform 0.3s ease;
 }
+.releaseNote {
+    margin-top: 30px;
+    padding: 20px;
+    background: #1a1a1a;
+    border-radius: 10px;
+    border: 1px solid #333;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+    
+}
+.releaseNote h2 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    color: #00d4ff;
+}
 
+.releaseNote h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #ff00d4;
+}
+
+.releaseNote ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.releaseNote li {
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    background: #141414;
+    border-left: 4px solid #00d4ff;
+    border-radius: 8px;
+    font-size: 0.95rem;
+}
+
+.releaseNote .changelog a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.releaseNote .changelog a:hover {
+    text-decoration: underline;
+}
+.releaseNote p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #ccc;
+}
