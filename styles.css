@@ -249,8 +249,3 @@ footer {
 .releaseNote .changelog a:hover {
     text-decoration: underline;
 }
-.releaseNote p {
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #ccc;
-}
