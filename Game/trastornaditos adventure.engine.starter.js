@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"ensureCrossOriginIsolationHeaders":true,"executable":"trastornaditos adventure","experimentalVK":false,"fileSizes":{"../../Real-Team-Game-/Game/trastornaditos adventure.wasm":45855791,"trastornaditos adventure.pck":933120},"focusCanvas":true,"gdextensionLibs":[],"serviceWorker":"trastornaditos adventure.service.worker.js"};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"ensureCrossOriginIsolationHeaders":true,"executable":"trastornaditos adventure","experimentalVK":false,"fileSizes":{"../../Real-Team-Game-/Game/trastornaditos adventure.wasm":45855791,"trastornaditos adventure.pck":1073024},"focusCanvas":true,"gdextensionLibs":[],"serviceWorker":"trastornaditos adventure.service.worker.js"};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
