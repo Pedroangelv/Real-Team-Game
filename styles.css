@@ -163,10 +163,10 @@ footer {
 
 .readme-box {
     background: #111;
-    border: 1px solid #333;
-    border-radius: 15px;
     padding: 20px;
-    max-height: 450px;
+    border-radius: 15px;
+    border: 1px solid #333;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
 }
 
 .readme-box pre {
