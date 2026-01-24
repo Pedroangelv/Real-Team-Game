@@ -2,7 +2,9 @@ const apiURL = `https://api.github.com/repos/Pedroangelv/RT_GAME/releases/latest
 
 async function loadRelease() {
     try {
-        const response = await fetch(apiURL);
+        const response = await fetch(apiURL, {
+            cache: "no-store"
+        });
         const release = await response.json();
 
         document.getElementById("version").textContent = release.tag_name;
