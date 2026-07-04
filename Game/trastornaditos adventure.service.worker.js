@@ -4,20 +4,20 @@
 // Incrementing CACHE_VERSION will kick off the install event and force
 // previously cached resources to be updated from the network.
 /** @type {string} */
-const CACHE_VERSION = '1769202216|1200477763';
+const CACHE_VERSION = '1783130874|3113802736';
 /** @type {string} */
 const CACHE_PREFIX = 'RT_GAME-sw-cache-';
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;
 /** @type {string} */
 const OFFLINE_URL = 'trastornaditos adventure.offline.html';
 /** @type {boolean} */
-const ENSURE_CROSSORIGIN_ISOLATION_HEADERS = typeof true === 'undefined' ? false : true;
+const ENSURE_CROSSORIGIN_ISOLATION_HEADERS = true;
 // Files that will be cached on load.
 /** @type {string[]} */
-const CACHED_FILES = typeof ["trastornaditos adventure.html","trastornaditos adventure.js","trastornaditos adventure.offline.html","trastornaditos adventure.icon.png","trastornaditos adventure.apple-touch-icon.png","trastornaditos adventure.audio.worklet.js","trastornaditos adventure.audio.position.worklet.js"] === 'undefined' ? [] : ["trastornaditos adventure.html","trastornaditos adventure.js","trastornaditos adventure.offline.html","trastornaditos adventure.icon.png","trastornaditos adventure.apple-touch-icon.png","trastornaditos adventure.audio.worklet.js","trastornaditos adventure.audio.position.worklet.js"];
+const CACHED_FILES = ["trastornaditos adventure.html","trastornaditos adventure.js","trastornaditos adventure.offline.html","trastornaditos adventure.icon.png","trastornaditos adventure.apple-touch-icon.png","trastornaditos adventure.audio.worklet.js","trastornaditos adventure.audio.position.worklet.js"];
 // Files that we might not want the user to preload, and will only be cached on first load.
 /** @type {string[]} */
-const CACHEABLE_FILES = typeof ["trastornaditos adventure.wasm","trastornaditos adventure.pck"] === 'undefined' ? [] : ["trastornaditos adventure.wasm","trastornaditos adventure.pck"];
+const CACHEABLE_FILES = ["trastornaditos adventure.wasm","trastornaditos adventure.pck"];
 const FULL_CACHE = CACHED_FILES.concat(CACHEABLE_FILES);
 
 self.addEventListener('install', (event) => {
@@ -50,12 +50,13 @@ function ensureCrossOriginIsolationHeaders(response) {
 	const crossOriginIsolatedHeaders = new Headers(response.headers);
 	crossOriginIsolatedHeaders.set('Cross-Origin-Embedder-Policy', 'require-corp');
 	crossOriginIsolatedHeaders.set('Cross-Origin-Opener-Policy', 'same-origin');
-
-	return new Response(response.body, {
+	const newResponse = new Response(response.body, {
 		status: response.status,
 		statusText: response.statusText,
 		headers: crossOriginIsolatedHeaders,
 	});
+
+	return newResponse;
 }
 
 /**
@@ -80,7 +81,7 @@ async function fetchAndCache(event, cache, isCacheable) {
 
 	if (isCacheable) {
 		// And update the cache
-		await cache.put(event.request, response.clone());
+		cache.put(event.request, response.clone());
 	}
 
 	return response;
@@ -111,7 +112,8 @@ self.addEventListener(
 					if (missing) {
 						try {
 							// Try network if some cached file is missing (so we can display offline page in case).
-							return await fetchAndCache(event, cache, isCacheable);
+							const response = await fetchAndCache(event, cache, isCacheable);
+							return response;
 						} catch (e) {
 							// And return the hopefully always cached offline page in case of network failure.
 							console.error('Network error: ', e); // eslint-disable-line no-console
@@ -127,7 +129,8 @@ self.addEventListener(
 					return cached;
 				}
 				// Try network if don't have it in cache.
-				return await fetchAndCache(event, cache, isCacheable);
+				const response = await fetchAndCache(event, cache, isCacheable);
+				return response;
 			})());
 		} else if (ENSURE_CROSSORIGIN_ISOLATION_HEADERS) {
 			event.respondWith((async () => {
