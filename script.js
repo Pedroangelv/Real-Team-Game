@@ -30,7 +30,7 @@ async function loadRelease() {
             `;
         }
 
-        // Cambios
+        // Changelog
         const changesMatch = raw.match(/\*\*CAMBIOS\*\*([\s\S]*)/);
         if (changesMatch) {
             const changes = changesMatch[1]
